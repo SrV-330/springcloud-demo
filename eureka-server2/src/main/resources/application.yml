@@ -1,0 +1,17 @@
+server:
+  port: 8762
+spring:
+  application:
+    name: eureka-server
+eureka:
+  instance:
+#    prefer-ip-address: true
+#    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    hostname: eureka2 #eureka服务端的实例名称，
+    lease-expiration-duration-in-seconds: 30 #表示 Eureka Server 在接收到上一个心跳之后等待下一个心跳的秒数（默认 90 秒），若不能在指定时间内收到心跳，则移除此实例，并禁止此实例的流量。
+    lease-renewal-interval-in-seconds: 15 #表示 Eureka Client 向 Eureka Server 发送心跳的频率（默认 30 秒），如果在 lease-expiration-duration-in-seconds 指定的时间内未收到心跳，则移除该实例。
+  client:
+    register-with-eureka: true #false表示不向注册中心注册自己。
+    fetch-registry: true #false表示自己端就是注册中心，我的职责就是维护服务实例，并不需要去检索服务
+    service-url:
+      defaultZone: http://eureka1:8761/eureka/ #单机版服务注册中心
